@@ -6,14 +6,29 @@ import { document } from "@keystone-6/fields-document";
 export const Post = list({
   access: {
     operation: {
-   
-       create: ({  session }) => {
+      create: ({ session }) => {
+        console.log(session);
         if (!session) return false;
         if (session.data.id) return true;
       },
-      update: ({ authentication: { item } }) => !!item,
-      delete: ({ authentication: { item } }) => !!item,
+
     },
+    item: {
+      update: ({ session, item }) => {
+         if(session?.data?.id===item?.authorId){
+          return true;
+         } 
+        return false;
+      },
+      delete:({session,item})=>{
+        if(session?.data?.id===item?.authorId){
+          return true;
+         } 
+        return false;
+     
+      }
+    },
+  
   },
   fields: {
     title: text({ validation: { isRequired: true } }),
