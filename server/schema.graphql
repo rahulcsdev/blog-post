@@ -129,14 +129,10 @@ input PostRelateToManyForCreateInput {
 type Post {
   id: ID!
   title: String
-  description: Post_description_Document
+  description: String
   updatedAt: DateTime
   author: User
   slug: String
-}
-
-type Post_description_Document {
-  document(hydrateRelationships: Boolean! = false): JSON!
 }
 
 scalar DateTime @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
@@ -151,6 +147,7 @@ input PostWhereInput {
   NOT: [PostWhereInput!]
   id: IDFilter
   title: StringFilter
+  description: StringFilter
   updatedAt: DateTimeNullableFilter
   author: UserWhereInput
   slug: StringFilter
@@ -170,13 +167,14 @@ input DateTimeNullableFilter {
 input PostOrderByInput {
   id: OrderDirection
   title: OrderDirection
+  description: OrderDirection
   updatedAt: OrderDirection
   slug: OrderDirection
 }
 
 input PostUpdateInput {
   title: String
-  description: JSON
+  description: String
   updatedAt: DateTime
   author: UserRelateToOneForUpdateInput
   slug: String
@@ -195,7 +193,7 @@ input PostUpdateArgs {
 
 input PostCreateInput {
   title: String
-  description: JSON
+  description: String
   updatedAt: DateTime
   author: UserRelateToOneForCreateInput
   slug: String

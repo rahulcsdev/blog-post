@@ -32,7 +32,7 @@ export const Post = list({
   },
   fields: {
     title: text({ validation: { isRequired: true } }),
-    description: document(),
+    description: text(),
     updatedAt: timestamp(),
     author: relationship({ ref: "User.post", many: false }),
     slug: text({ validation: { isRequired: true } }),
